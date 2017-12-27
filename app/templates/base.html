@@ -1,11 +1,12 @@
 <html>
     <head>
-      {% if title %}
-      <title>{{ title }} - Noel codes.</title>
-      {% else %}
-      <title>Noel codes.</title>
-      {% endif %}
-      <link rel="stylesheet" href="static/css/bulma-0.6.1/css/bulma.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% if title %}
+        <title>{{ title }} - Noel codes.</title>
+        {% else %}
+        <title>Noel codes.</title>
+        {% endif %}
+        <link rel="stylesheet" href="static/css/bulma-0.6.1/css/bulma.css">
     </head>
     <body>
         <div>noel codes.:
@@ -13,19 +14,24 @@
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>
             {% else %}
+            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
             <a href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
         </div>
         <hr>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
+        <section class="section">
+            <div class="container">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                {% block content %}{% endblock %}
+            </div>
+        </section>
     </body>
 </html>
